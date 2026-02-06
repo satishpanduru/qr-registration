@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful | Digital Workshop</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Additional styles specific to result page */
+        .result-container {
+            text-align: center;
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .result-icon {
+            margin-bottom: var(--spacing-lg);
+            animation: scaleIn 0.6s ease;
+        }
+        
+        .result-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .result-message {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xl);
+            line-height: 1.6;
+        }
+        
+        /* Table number display */
+        .table-display {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: var(--spacing-xl);
+            margin: var(--spacing-xl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .table-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+        }
+        
+        .table-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .table-number {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin: var(--spacing-md) 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+        
+        .attendee-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-lg);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--glass-border);
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-xs) 0;
+        }
+        
+        .info-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .info-value {
+            font-size: 0.875rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        /* Action button */
+        .back-btn {
+            display: inline-block;
+            font-family: var(--font-family);
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            margin-top: var(--spacing-lg);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            background: var(--glass-bg);
+            color: var(--text-secondary);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            background: rgba(0, 212, 255, 0.05);
+        }
+        
+        /* Error state */
+        .error-container {
+            text-align: center;
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .error-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto var(--spacing-lg);
+            border-radius: 50%;
+            background: rgba(255, 68, 68, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .error-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ff6b6b;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .error-message {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        /* Loading state */
+        .loading {
+            text-align: center;
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto var(--spacing-md);
+            border: 3px solid var(--glass-border);
+            border-top-color: var(--accent-cyan);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background overlay -->
+    <div class="bg-overlay"></div>
+    
+    <!-- Main container -->
+    <div class="container">
+        
+        <!-- Loading state (shown initially) -->
+        <div id="loadingState" class="loading">
+            <div class="loading-spinner"></div>
+            <p style="color: var(--text-secondary); font-size: 0.875rem;">Loading your registration...</p>
+        </div>
+        
+        <!-- Success state (hidden initially) -->
+        <div id="successState" class="result-container" style="display: none;">
+            <!-- Success icon -->
+            <div class="result-icon">
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                    <circle cx="32" cy="32" r="30" stroke="url(#resultGradient)" stroke-width="2"/>
+                    <path d="M20 32L28 40L44 24" stroke="url(#resultGradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="resultGradient" x1="0" y1="0" x2="64" y2="64">
+                            <stop offset="0%" stop-color="#00ff88"/>
+                            <stop offset="100%" stop-color="#00d4ff"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            
+            <h1 class="result-title">Registration Successful!</h1>
+            <p class="result-message" id="welcomeMessage">Welcome to the Digital Workshop 2026!</p>
+            
+            <!-- Table assignment display -->
+            <div class="table-display">
+                <div class="table-label">Your Assigned Table</div>
+                <div class="table-number" id="tableNumber">--</div>
+                
+                <!-- Attendee details -->
+                <div class="attendee-info">
+                    <div class="info-row">
+                        <span class="info-label">Name</span>
+                        <span class="info-value" id="attendeeName">--</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Department</span>
+                        <span class="info-value" id="attendeeDept">--</span>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: var(--spacing-md);">
+                Please proceed to your assigned table
+            </p>
+            
+            <a href="/" class="back-btn">← Back to Registration</a>
+        </div>
+        
+        <!-- Error state (hidden initially) -->
+        <div id="errorState" class="error-container" style="display: none;">
+            <div class="error-icon">⚠️</div>
+            <h2 class="error-title">Registration Issue</h2>
+            <p class="error-message" id="errorMessage">Something went wrong</p>
+            <a href="/" class="back-btn">← Try Again</a>
+        </div>
+        
+    </div>
+    
+    <script src="result.js"></script>
+</body>
+</html>

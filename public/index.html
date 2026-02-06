@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration | Digital Workshop</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Background overlay -->
+    <div class="bg-overlay"></div>
+
+    <!-- Main container -->
+    <div class="container">
+
+        <!-- Header -->
+        <header class="header">
+
+            <!-- Registration Icon -->
+            <div class="logo-icon">
+                <svg width="44" height="44" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="6" y="4" width="30" height="40" rx="6" stroke="url(#gradient)" stroke-width="2"/>
+                    <path d="M14 14H28M14 20H28M14 26H22" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M26 30L30 34L36 26" stroke="url(#gradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0" y1="0" x2="48" y2="48">
+                            <stop offset="0%" stop-color="#00d4ff"/>
+                            <stop offset="100%" stop-color="#7b2ff7"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+
+
+            <h1 class="title"><span class="highlight">Digital Workshop</span> 2026</h1>
+            <p class="subtitle">Event Registration</p>
+        </header>
+
+        <!-- Form -->
+        <form id="registrationForm" class="form">
+
+            <!-- Name -->
+            <!-- <div class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="form-input"
+                    placeholder="Enter your name"
+                    required
+                    autocomplete="name"
+                >
+            </div> -->
+
+            <!-- Mobile Number -->
+            <!-- <div class="form-group">
+                <label for="mobile" class="form-label">Mobile Number</label>
+                <input
+                    type="tel"
+                    id="mobile"
+                    name="mobile"
+                    class="form-input"
+                    placeholder="Enter your mobile number"
+                    required
+                    pattern="[0-9]{10}"
+                    title="Please enter a valid 10-digit mobile number"
+                    autocomplete="tel"
+                >
+            </div> -->
+
+            <!-- Department -->
+            <!-- <div class="form-group">
+                <label for="department" class="form-label">Department</label>
+                <div class="select-wrapper">
+                    <select id="department" name="department" class="form-select" required>
+                        <option value="" disabled selected>Select department</option>
+                        <option value="EHS">EHS</option>
+                        <option value="PPC">PPC</option>
+                        <option value="Production">Production</option>
+                        <option value="HR">HR</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Quality">Quality</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Procurement">Procurement</option>
+                        <option value="QBM">QBM</option>
+                    </select>
+
+                    <svg class="select-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                        <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div> -->
+
+            <!-- SAP ID -->
+            <div class="form-group">
+                <label for="sapId" class="form-label">SAP ID</label>
+                <input
+                    type="text"
+                    id="sapId"
+                    name="sapId"
+                    class="form-input"
+                    placeholder="Enter your SAP ID"
+                    required
+                    pattern="[0-9]+"
+                    title="SAP ID should contain only numbers"
+                >
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <span class="btn-text">Register Now</span>
+                <span class="btn-loader" style="display: none;">
+                    <svg class="spinner" width="20" height="20" viewBox="0 0 20 20">
+                        <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    </svg>
+                </span>
+            </button>
+            
+            <!-- Error Message -->
+            <div class="error-alert" id="errorAlert" style="display: none;">
+                <svg class="error-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="9" stroke="#ff6b6b" stroke-width="2"/>
+                    <path d="M10 6V10M10 14H10.01" stroke="#ff6b6b" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <span class="error-text" id="errorText"></span>
+            </div>
+
+        </form>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage" style="display: none;">
+            <svg class="success-icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="22" stroke="url(#successGradient)" stroke-width="2"/>
+                <path d="M14 24L20 30L34 16" stroke="url(#successGradient)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs>
+                    <linearGradient id="successGradient" x1="0" y1="0" x2="48" y2="48">
+                        <stop offset="0%" stop-color="#00ff88"/>
+                        <stop offset="100%" stop-color="#00d4ff"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+
+            <h2 class="success-title">Registration Successful!</h2>
+            <p class="success-text">You're all set for the workshop.</p>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
