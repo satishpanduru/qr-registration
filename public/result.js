@@ -72,8 +72,11 @@ function showSuccess(tableNo, name, department, message) {
     // Hide loading
     loadingState.style.display = 'none';
     
+    // Convert "Team X" to "Table X" for display
+    const displayTableNo = tableNo.replace(/^Team\s+/i, 'Table ');
+    
     // Populate data
-    tableNumber.textContent = tableNo;
+    tableNumber.textContent = displayTableNo;
     attendeeName.textContent = capitalizeWords(name);
     attendeeDept.textContent = department;
     

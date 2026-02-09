@@ -103,7 +103,7 @@ function findAttendee(sapId) {
     const sapIdTrimmed = sapId.trim();
     
     return attendeeDatabase.find(attendee => 
-        String(attendee.sapId) === sapIdTrimmed
+        String(attendee['SAP ID']) === sapIdTrimmed
     );
 }
 
@@ -153,13 +153,13 @@ app.post('/api/register', (req, res) => {
         
         if (attendee) {
             // Success - attendee found
-            console.log(`✓ Registration: ${attendee.name} (SAP: ${sapId}) → Table ${attendee.tableNo}`);
+            console.log(`✓ Registration: ${attendee['Name']} (SAP: ${sapId}) → ${attendee['Table No']}`);
             
             return res.status(200).json({
                 success: true,
-                tableNo: attendee.tableNo,
-                name: attendee.name,
-                department: attendee.department,
+                tableNo: attendee['Table No'],
+                name: attendee['Name'],
+                department: attendee['Department'] || '',
                 message: 'Registration successful! Welcome to the Digital Workshop 2026!'
             });
         } else {
