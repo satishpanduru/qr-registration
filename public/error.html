@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Additional styles specific to error page */
+        /* Additional styles specific to error page - refined */
         .error-container {
             text-align: center;
             padding: var(--spacing-xl) 0;
@@ -24,12 +24,12 @@
             height: 80px;
             margin: 0 auto var(--spacing-lg);
             border-radius: 50%;
-            background: rgba(255, 107, 107, 0.1);
-            border: 2px solid rgba(255, 107, 107, 0.3);
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid rgba(239, 68, 68, 0.25);
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: scaleIn 0.6s ease;
+            animation: scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .error-icon-large svg {
@@ -38,10 +38,11 @@
         }
         
         .error-title {
-            font-size: 1.75rem;
-            font-weight: 600;
+            font-size: 1.875rem;
+            font-weight: 700;
             margin-bottom: var(--spacing-md);
-            color: #ff6b6b;
+            color: #ef4444;
+            letter-spacing: -0.02em;
         }
         
         .error-message {
@@ -49,6 +50,7 @@
             color: var(--text-secondary);
             margin-bottom: var(--spacing-sm);
             line-height: 1.6;
+            font-weight: 500;
         }
         
         .error-details {
@@ -60,10 +62,13 @@
         
         .error-box {
             background: var(--glass-bg);
-            border: 1px solid rgba(255, 107, 107, 0.2);
+            border: 1.5px solid rgba(239, 68, 68, 0.2);
             border-radius: 16px;
-            padding: var(--spacing-lg);
+            padding: var(--spacing-xl);
             margin: var(--spacing-xl) 0;
+            box-shadow: 
+                0 0 30px rgba(239, 68, 68, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.03);
         }
         
         .error-box::before {
@@ -73,7 +78,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, #ff6b6b, #ff8787);
+            background: linear-gradient(90deg, #ef4444 0%, #f87171 100%);
         }
         
         .back-btn {
@@ -82,27 +87,28 @@
             gap: var(--spacing-xs);
             font-family: var(--font-family);
             font-size: 1rem;
-            font-weight: 500;
+            font-weight: 600;
             padding: 1rem 2rem;
             margin-top: var(--spacing-md);
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
             overflow: hidden;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
-            color: white;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
+            color: #ffffff;
             text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            letter-spacing: 0.01em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 
-                0 4px 20px rgba(0, 212, 255, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+                0 8px 24px rgba(0, 212, 255, 0.25),
+                0 0 0 1px rgba(255, 255, 255, 0.15) inset;
         }
         
         .back-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             box-shadow: 
-                0 6px 30px rgba(0, 212, 255, 0.4),
-                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+                0 12px 32px rgba(0, 212, 255, 0.35),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
         }
         
         .contact-info {
@@ -114,6 +120,7 @@
         .contact-text {
             font-size: 0.875rem;
             color: var(--text-muted);
+            line-height: 1.6;
         }
     </style>
 </head>

@@ -152,15 +152,33 @@ app.post('/api/register', (req, res) => {
         const attendee = findAttendee(sapId);
         
         if (attendee) {
+            // Get table/role assignment
+            const assignment = attendee['Table No'] || '';
+            
+            // Determine role and message based on assignment
+            let role = '';
+            let displayMessage = 'Registration successful! Welcome to the Digital Workshop 2026!';
+            
+            if (assignment.toLowerCase().includes('host')) {
+                role = 'Host';
+                displayMessage = 'Welcome! You are registered as a Host for the Digital Workshop 2026!';
+            } else if (assignment.toLowerCase().includes('coordinator')) {
+                role = 'Coordinator';
+                displayMessage = 'Welcome! You are registered as a Coordinator for the Digital Workshop 2026!';
+            } else {
+                role = 'Attendee';
+            }
+            
             // Success - attendee found
-            console.log(`✓ Registration: ${attendee['Name']} (SAP: ${sapId}) → ${attendee['Table No']}`);
+            console.log(`✓ Registration: ${attendee['Name']} (SAP: ${sapId}) → ${assignment}`);
             
             return res.status(200).json({
                 success: true,
-                tableNo: attendee['Table No'],
+                tableNo: assignment,
                 name: attendee['Name'],
                 department: attendee['Department'] || '',
-                message: 'Registration successful! Welcome to the Digital Workshop 2026!'
+                role: role,
+                message: displayMessage
             });
         } else {
             // Not found - SAP ID not in database

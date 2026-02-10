@@ -45,11 +45,12 @@ function displayResult() {
         const name = urlParams.get('name');
         const department = urlParams.get('department');
         const message = urlParams.get('message');
+        const role = urlParams.get('role');
         
         // Check if we have valid data
-        if (tableNo && name && department) {
+        if (tableNo && name) {
             // Show success state
-            showSuccess(tableNo, name, department, message);
+            showSuccess(tableNo, name, department, message, role);
         } else {
             // No valid data - show error
             showError('Invalid registration data. Please try again.');
@@ -68,15 +69,42 @@ function displayResult() {
 /**
  * Display success state with registration details
  */
-function showSuccess(tableNo, name, department, message) {
+function showSuccess(tableNo, name, department, message, role) {
     // Hide loading
     loadingState.style.display = 'none';
     
-    // Convert "Team X" to "Table X" for display
-    const displayTableNo = tableNo.replace(/^Team\s+/i, 'Table ');
+    // Determine how to display the assignment
+    let displayLabel = 'Your Assigned Table';
+    let displayValue = tableNo;
+    let isRole = false;
+    
+    // Check if it's a special role
+    const tableNoLower = tableNo.toLowerCase();
+    if (tableNoLower.includes('host')) {
+        displayLabel = 'Your Role';
+        displayValue = '🎯 Host';
+        isRole = true;
+    } else if (tableNoLower.includes('coordinator')) {
+        displayLabel = 'Your Role';
+        displayValue = '🎓 Coordinator';
+        isRole = true;
+    } else {
+        // Convert "Team X" to "Table X" for regular attendees
+        displayValue = tableNo.replace(/^Team\s+/i, 'Table ');
+    }
+    
+    // Update the label
+    document.querySelector('.table-label').textContent = displayLabel;
+    
+    // Add class for role text to adjust font size
+    if (isRole) {
+        tableNumber.classList.add('role-text');
+    } else {
+        tableNumber.classList.remove('role-text');
+    }
     
     // Populate data
-    tableNumber.textContent = displayTableNo;
+    tableNumber.textContent = displayValue;
     attendeeName.textContent = capitalizeWords(name);
     attendeeDept.textContent = department;
     
